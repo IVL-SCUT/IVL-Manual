@@ -10,6 +10,8 @@
   - [3.1. Xshell](#31-xshell)
   - [3.2. PyCharm](#32-pycharm)
   - [3.3. VS Code](#33-vs-code)
+- [4. 管理员相关](#4-管理员相关)
+  - [4.1. 用户管理](#41-用户管理)
 
 # 1. 账户
 
@@ -166,3 +168,24 @@ Visual Studio Code 是一款轻量化但极为强大的编辑器，有着丰富�
 
 具体操作嘛，有空再写，可以看看这个教程<https://blog.csdn.net/weixin_50548064/article/details/122664871>，写得很详细，其中上传公钥那一步，可以用之前申请的 Xftp，其它的照着来就好了。
 
+# 4. 管理员相关
+
+如果你是管理员，下面这些命令对你来说可能会很有用。
+
+## 4.1. 用户管理
+
+```bash
+sudo adduser username  # 添加一个新用户 username
+sudo passwd username  # 为用户 username 设置密码, 也可以用 passwd 命令修改用户密码
+sudo userdel -r username  # 删除用户 username 及其目录
+sudo groupadd -g 1000 groupname  # 添加一个新组 groupname, gid 为 1000
+sudo groupdel groupname  # 删除组 groupname
+sudo gpasswd -a username groupname  # 将用户 username 添加到组 groupname
+sudo gpasswd -d username groupname  # 将用户 username 从组 groupname 中删除
+sudo groupmod -n newgroupname groupname  # 将组 groupname 改名为 newgroupname
+sudo id username  # 查看用户 username 的信息: uid, gid, groups
+sudo finger username  # 查看用户 username 的信息: uid, gid, groups, home, shell
+sudo usermod -a -G groupname username  # 将用户 username 添加到组 groupname
+cat /etc/passwd  # 查看所有用户信息
+cat /etc/group  # 查看所有组信息
+```
