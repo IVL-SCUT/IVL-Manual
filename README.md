@@ -12,6 +12,7 @@
   - [3.3. VS Code](#33-vs-code)
 - [4. 管理员相关](#4-管理员相关)
   - [4.1. 用户管理](#41-用户管理)
+  - [4.2. Disk Usage](#42-disk-usage)
 
 # 1. 账户
 
@@ -188,4 +189,10 @@ sudo finger username  # 查看用户 username 的信息: uid, gid, groups, home,
 sudo usermod -a -G groupname username  # 将用户 username 添加到组 groupname
 cat /etc/passwd  # 查看所有用户信息
 cat /etc/group  # 查看所有组信息
+```
+
+## 4.2. Disk Usage
+
+```bash
+sudo du -sh *  # 查看当前目录下所有文件夹的大小
 ```
