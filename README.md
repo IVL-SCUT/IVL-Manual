@@ -4,27 +4,37 @@
 
 **目录**
 
-- [1. 账户](#1-账户)
-- [2. Python](#2-python)
-- [3. 访问](#3-访问)
-  - [3.1. Xshell](#31-xshell)
-  - [3.2. PyCharm](#32-pycharm)
-  - [3.3. VS Code](#33-vs-code)
-- [4. 管理员相关](#4-管理员相关)
-  - [4.1. 用户管理](#41-用户管理)
-  - [4.2. Disk Usage](#42-disk-usage)
+- [1. 服务器](#1-服务器)
+- [2. 账户](#2-账户)
+- [3. Python](#3-python)
+- [4. 访问](#4-访问)
+  - [4.1. Xshell](#41-xshell)
+  - [4.2. PyCharm](#42-pycharm)
+  - [4.3. VS Code](#43-vs-code)
+- [5. 管理员相关](#5-管理员相关)
+  - [5.1. 用户管理](#51-用户管理)
+  - [5.2. Disk Usage](#52-disk-usage)
 
-# 1. 账户
+# 1. 服务器
+
+目前组内服务器情况如下：
+
+| hostname | OS           | CPU         | GPU              | RAM   | Disk              |
+| -------- | ------------ | ----------- | ---------------- | ----- | ----------------- |
+| ivl1     | Ubuntu 20.04 | AMD 5950x   | 2x NVIDIA 3080Ti | 128GB | 1TB SSD + 2TB HDD |
+| ivl2     | Ubuntu 22.04 | 2x AMD 7Y43 | NVIDIA 3090      | 128GB | 2TB SSD           |
+
+# 2. 账户
 
 找当前管理员添加账户到系统内，设置时注意：
 
-- Full name: 你的名称，显示在登录界面的名称，建议全名，如：Jinming Xu
+- Full name: 你的名称，显示在登录界面的名称，建议和 User name 一致
 - User name: 终端显示的名称，建议尽量简短，如：jinming
 - Passwords: 登录密码，建议尽量简短，因为会大量使用
 
-服务器有一个公用账户 Public，密码见 OneDrive，轻度使用可登录该账户，配置了常用的软件和 Python 包，服务器每次启动也会默认登录该账户用于启动 AnyDesk 和 TeamViewer。
+服务器有公用账户，密码见 OneDrive/passwords.txt，轻度使用可登录该账户，配置了常用的软件和 Python 包，服务器每次启动会默认登录该账户。
 
-# 2. Python
+# 3. Python
 
 统一使用 Anaconda 进行环境管理，Anaconda3 被安装在 `/opt/anaconda3` 中，所有用户都可以访问，只需要在个人配置 `.bashrc` 中添加环境变量（vim 语法可参考 <https://www.runoob.com/linux/linux-vim.html>）：
 
@@ -36,25 +46,37 @@ PATH="/opt/anaconda3/bin:$PATH"
 # 保存并退出，执行下面语句
 >>> source .bashrc
 # 然后就可以使用 conda 了，可以检查一下：
->>> conda --version
+>>> conda -V
 conda 4.10.3
 ```
 
-注意，默认进入的 Python 环境是 base，base 已经安装了很多常用的包，如果有需要可以添加自己的环境，详情可自行学习 [conda 的命令](https://docs.conda.io/projects/conda/en/latest/commands.html)，或者也可以在个人文件夹中额外安装 Anaconda，但请注意空间的分配，不要浪费。
+注意，默认进入的 Python 环境是 base，base 已经安装了很多常用的包，供轻度使用。
+如果是做自己的课题，强烈建议创建一个新的环境，以免污染 base 环境，创建新环境的命令如下：
 
-# 3. 访问
+```Bash
+# 创建一个名为 myenv 的环境
+>>> conda create -n myenv python=3.8
+# 激活环境
+>>> conda activate myenv
+# 删除环境
+>>> conda remove -n myenv --all
+```
+
+更多命令可自行学习 [conda 的命令](https://docs.conda.io/projects/conda/en/latest/commands.html)。
+
+# 4. 访问
 
 访问服务器有三个方案：
 
-- 直接访问：服务器配有显示器和键鼠，空闲期间可直接当主机使用，同时只能有一人使用
+- 直接访问：服务器配有显示器和键鼠，空闲期间可直接当主机使用，同时只能有一人使用。
 
-- 远程连接软件：暂时有 AnyDesk 和 TeamViewer 可使用，本地下载对应软件，输入地址和密码即可连接，最新的地址和密码会更新到课题组 OneDrive 的 `/passwords.txt`。同时只能一人使用。
+- 远程连接软件：所有服务器均取消远程桌面，仅供特殊情况使用。
 
 - SSH：SSH (Secure Shell) 作为便携的远程访问协议，建议作为首要的服务器访问方式，可同时容纳多名用户。
 
 这里重点介绍3种使用 ssh 的方式，Xshell，PyCharm，VS Code。
 
-## 3.1. Xshell
+## 4.1. Xshell
 
 Xshell可以创建多个会话窗口，给予你纯粹且轻量化的命令行交互方式。处理文件，运行写好的代码，都可以选择Xshell。
 
@@ -78,7 +100,7 @@ Xshell可以创建多个会话窗口，给予你纯粹且轻量化的命令行�
 
 后续可直接双击保存的会话进入。Xftp 连接基本一样，不再赘述。
 
-## 3.2. PyCharm
+## 4.2. PyCharm
 
 PyCharm 配置好远程服务器之后，可直接用远程（remote）资源（GPU、CPU等）运行并调试代码。运行逻辑上就是调用了服务器上的解释器（interpreter），如果你不懂什么是解释器，建议弄懂之后再来看本教程。
 
@@ -145,7 +167,7 @@ PyCharm 配置好远程服务器之后，可直接用远程（remote）资源（
 
 ![img](assets/Snipaste_2022-07-28_16-22-33.png)
 
-就不用再重复添加解释器了，但注意要重新部署文件夹映射，因为我们换了一个新的文件夹嘛，`部署设置`在顶部的工具选项里：
+就不用再重复添加解释器了，但注意要重新部署文件夹映射，因为我们换了一个新的文件夹，`部署设置`在顶部的工具选项里：
 
 ![img](assets/Snipaste_2022-07-28_19-39-26.png)
 
@@ -159,7 +181,7 @@ PyCharm 配置好远程服务器之后，可直接用远程（remote）资源（
 
 ![Snipaste_2022-07-04_11-28-02.png](assets/Snipaste_2022-07-04_11-28-02.png)
 
-## 3.3. VS Code
+## 4.3. VS Code
 
 Visual Studio Code 是一款轻量化但极为强大的编辑器，有着丰富的语言支持和插件生态。当你有多语言开发需求的时候，可以试试 VS Code，当然，重度开发还是得上专用的 IDE。
 
@@ -167,13 +189,13 @@ Visual Studio Code 是一款轻量化但极为强大的编辑器，有着丰富�
 
 ![img](assets/Snipaste_2022-07-28_20-43-14.png) -->
 
-具体操作嘛，有空再写，可以看看这个教程<https://blog.csdn.net/weixin_50548064/article/details/122664871>，写得很详细，其中上传公钥那一步，可以用之前申请的 Xftp，其它的照着来就好了。
+具体操作有空再写，可以看看这个教程<https://blog.csdn.net/weixin_50548064/article/details/122664871>，写得很详细，其中上传公钥那一步，可以用之前申请的 Xftp，其它的照着来就好了。
 
-# 4. 管理员相关
+# 5. 管理员相关
 
 如果你是管理员，下面这些命令对你来说可能会很有用。
 
-## 4.1. 用户管理
+## 5.1. 用户管理
 
 ```bash
 sudo adduser username  # 添加一个新用户 username
@@ -191,7 +213,7 @@ cat /etc/passwd  # 查看所有用户信息
 cat /etc/group  # 查看所有组信息
 ```
 
-## 4.2. Disk Usage
+## 5.2. Disk Usage
 
 ```bash
 sudo du -sh *  # 查看当前目录下所有文件夹的大小
