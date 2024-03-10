@@ -189,7 +189,7 @@ Visual Studio Code 是一款轻量化但极为强大的编辑器，有着丰富�
 
 ![img](assets/Snipaste_2022-07-28_20-43-14.png) -->
 
-具体操作有空再写，可以看看这个教程<https://blog.csdn.net/weixin_50548064/article/details/122664871>，写得很详细，其中上传公钥那一步，可以用之前申请的 Xftp，其它的照着来就好了。
+具体操作可以参考这个教程<https://blog.csdn.net/weixin_50548064/article/details/122664871>，写得简洁明了，其中上传公钥那一步，可以用之前申请的 Xftp，其它的照着来就好了。
 
 # 5. 管理员相关
 
