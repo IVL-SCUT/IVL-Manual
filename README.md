@@ -42,7 +42,7 @@
 # 编辑 .bashrc
 >>> vim .bashrc
 # 在最后一行添加以下语句
-PATH="/opt/anaconda3/bin:$PATH"
+export PATH="/opt/anaconda3/bin:$PATH"
 # 保存并退出，执行下面语句
 >>> source .bashrc
 # 然后就可以使用 conda 了，可以检查一下：
