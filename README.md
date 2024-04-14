@@ -194,6 +194,29 @@ Visual Studio Code 是一款轻量化但极为强大的编辑器，有着丰富�
 
 具体操作可以参考这个教程<https://blog.csdn.net/weixin_50548064/article/details/122664871>，写得简洁明了，其中上传公钥那一步，可以用之前申请的 Xftp，其它的照着来就好了。
 
+这里简单复制一下上面的教程，方便查看：
+
+- Win+R 打开命令行，输入 `ssh-keygen`，一路回车，生成密钥对。默认生成在 `C:\Users\用户名\.ssh` 下，公钥是 `id_rsa.pub`，私钥是 `id_rsa`。
+- 如果这是你第一次上传公钥到此台服务器，那么需要先创建一些文件夹：
+  - 在服务器上创建 `.ssh` 文件夹：`mkdir ~/.ssh`
+  - 在服务器上创建 `authorized_keys` 文件：`touch ~/.ssh/authorized_keys`
+- 上传公钥到服务器：
+  - 用 Xftp 连接服务器，把本地的 `id_rsa.pub` 上传到服务器的 `~/.ssh` 文件夹下。
+  - 在服务器上执行：`cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
+- 配置 VS Code：
+  - 安装 `Remote - SSH` 插件。
+  - 点击左下角的 `><`，选择 `Connect to Host... -> Configure SSH Hosts... -> C:\Users\用户名\.ssh\config`。
+  - 在 `config` 文件中添加：
+
+    ```txt
+    Host 服务器别名(ivl3-jinming)
+        HostName 服务器地址(10.32.xxx.xxx)
+        User 服务器用户名(jinming)
+        IdentityFile C:\Users\用户名\.ssh\id_rsa
+    ```
+
+  - 之后就可以直接连接了，点击左下角的 `><`，选择 `Connect to Host... -> 服务器别名(ivl3-jinming)`。
+
 # 5. 管理员相关
 
 如果你是管理员，下面这些命令对你来说可能会很有用。

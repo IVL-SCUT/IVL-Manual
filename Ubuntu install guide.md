@@ -2,6 +2,8 @@
 
 A simple installation guide for Ubuntu.
 
+## Single Boot
+
 `# 2024.03.26-2 10:06`
 
 - Download the required version of Ubuntu from Tsinghua mirror: [mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/).
@@ -21,7 +23,17 @@ Optional:
     - Recommend to install in `/opt/anaconda3`.
     - Input `yes` to initialize conda.
   - For other users to use Anaconda, add the following line to `~/.bashrc`:
+
     ```bash
     export PATH="/opt/anaconda3/bin:$PATH"
     ```
+
     Then run `source ~/.bashrc && conda init`.
+
+## Dual Boot with Windows
+
+`# 2024.04.14-7 13:45`
+
+Just follow the guide: [How to Set Up a Dual Boot with Ubuntu and Windows](https://gcore.com/learning/dual-boot-ubuntu-windows-setup/).
+
+A more detailed guide with disk partitioning: [How to Install Ubuntu Alongside Windows 10](https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/).
